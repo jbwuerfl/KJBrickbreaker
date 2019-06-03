@@ -1,7 +1,7 @@
 public class Ball extends Sprite{
 
     public Ball(){
-        super(500, 650, NORTH);
+        super(200, 200, NORTH);
         setPic("ball.png", NORTH); //overrides the default "blank.png"
         setSpeed(25);
     }
