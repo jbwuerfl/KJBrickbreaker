@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,10 +8,16 @@ public class BreakerMain extends JPanel {
     public static final int FRAMEWIDTH = 1000, FRAMEHEIGHT = 700;
     private Timer timer;
 
+    private Sprite ball;
+
+
+
 
 
 
     public BreakerMain(){
+
+        ball = new Ball();
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -22,6 +29,14 @@ public class BreakerMain extends JPanel {
 
 
     }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        ball.draw(g2);
+    }
+
+
 
     public static void main(String[] args) {
         JFrame window = new JFrame("Brick Breaker!");
