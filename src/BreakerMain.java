@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BreakerMain extends JPanel {
 
@@ -9,6 +11,13 @@ public class BreakerMain extends JPanel {
 
 
     public BreakerMain(){
+
+        timer = new Timer(40, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
 
 
