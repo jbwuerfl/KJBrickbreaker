@@ -17,7 +17,7 @@ public class BreakerMain extends JPanel {
 
     public BreakerMain(){
 
-        ball = new Ball(200,200,Sprite.WEST);
+        ball = new Ball(200,200,30);
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -38,7 +38,6 @@ public class BreakerMain extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
         g2.setColor(Color.black);
         g2.fillRect(0, 0, 1000, 750);
         ball.draw(g2);
