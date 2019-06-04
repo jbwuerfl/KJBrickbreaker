@@ -17,14 +17,19 @@ public class BreakerMain extends JPanel {
 
     public BreakerMain(){
 
-        ball = new Ball();
+        ball = new Ball(200,200,Sprite.WEST);
 
         timer = new Timer(40, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ball.update();
+
+                repaint();
 
             }
         });
+        timer.start();
+
 
 
 
