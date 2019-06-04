@@ -9,14 +9,34 @@ public class Ball extends Sprite{
     @Override
     public void update() {
         super.update();
-        if (getLoc().x > 900)
-            setDir(180-getDir());
-        if (getLoc().x < 0)
-            setDir(getDir()+90);
-        if (getLoc().y > 600)
-            setDir(getDir()+90);
-        if (getLoc().y < 0)
-            setDir(getDir()+90);
+        if (getLoc().x > 900) {
+            //setDir(180-getDir());
+            if (getDir() > 180)
+                setDir(180 - getDir());
+            else
+                setDir(getDir() - 90);
+        }
+        if (getLoc().x < 0) {
+            //setDir(180-getDir());
+            if (getDir() > 180)
+                setDir(180 - getDir());
+            else
+                setDir(getDir() - 90);
+        }
+        if (getLoc().y > 600) {
+            //setDir(180-getDir());
+            if (getDir() > 180)
+                setDir(180 - getDir());
+            else
+                setDir(getDir() - 90);
+        }
+        if (getLoc().y < 0){
+            if (getDir() > 180)
+                setDir(180-getDir());
+            else
+                setDir(getDir()-90);
+        }
+
     }
 
 }
