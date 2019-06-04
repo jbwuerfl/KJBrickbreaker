@@ -17,7 +17,7 @@ public class BreakerMain extends JPanel {
 
     public BreakerMain(){
 
-        ball = new Ball(200,200,30);
+        ball = new Ball(300,200,30);
 
         timer = new Timer(40, new ActionListener() {
             @Override

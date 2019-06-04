@@ -14,27 +14,27 @@ public class Ball extends Sprite{
             if (getDir() > 180)
                 setDir(180 - getDir());
             else
-                setDir(getDir() - 90);
+                setDir(getDir() + 270);
         }
         if (getLoc().x < 0) {
             //setDir(180-getDir());
             if (getDir() > 180)
                 setDir(180 - getDir());
             else
-                setDir(getDir() - 90);
+                setDir(getDir() + 270);
         }
         if (getLoc().y > 600) {
             //setDir(180-getDir());
             if (getDir() > 180)
                 setDir(180 - getDir());
             else
-                setDir(getDir() - 90);
+                setDir(getDir() + 270);
         }
         if (getLoc().y < 0){
             if (getDir() > 180)
                 setDir(180-getDir());
             else
-                setDir(getDir()-90);
+                setDir(getDir() + 270);
         }
 
     }
