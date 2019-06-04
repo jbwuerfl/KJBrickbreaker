@@ -38,7 +38,10 @@ public class BreakerMain extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(new Color(250,250,250));
+        g2.drawRect(0,0, FRAMEWIDTH, FRAMEHEIGHT);
         ball.draw(g2);
+
     }
 
 
