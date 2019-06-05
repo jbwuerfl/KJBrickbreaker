@@ -1,19 +1,18 @@
 public class Ball extends Sprite{
 
     public Ball(int x, int y, int direction){
-        super(x, y, direction);
+        super(x, y, direction, 5);
         setPic("ball.png", NORTH);
-        setSpeed(4);
     }
 
     @Override
     public void update() {
         super.update();
-        if(getLoc().x > 900 || getLoc().x < 0){
+        if(getLoc().x > 980 || getLoc().x < 20){
             setVx(-getVx());
         }
 
-        if(getLoc().y > 600 || getLoc().y < 0){
+        if(getLoc().y > 680 || getLoc().y < 20){
             setVy(-getVy());
         }
 

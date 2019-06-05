@@ -19,11 +19,11 @@ public class Sprite {
     private int id, vx, vy;
 
 
-    public Sprite(int x, int y, int dir) {
+    public Sprite(int x, int y, int dir, int speed) {
         this.loc = new Point(x, y);
         this.dir = dir;
         setPic("ball.png", NORTH);  //Assumes pic is oriented NORTH by default
-        speed = getBoundingRectangle().height;  //moves one height's worth by default.
+        this.speed = speed;
         vx = speed;
         vy = speed;
 
