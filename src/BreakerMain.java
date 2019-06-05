@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class BreakerMain extends JPanel {
 
@@ -31,13 +32,16 @@ public class BreakerMain extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 ball.update();
 
-                movebouncer();
+//                movebouncer();
 
                 repaint();
 
             }
         });
         timer.start();
+
+
+        setKeyListener();
 
 
 
@@ -55,28 +59,54 @@ public class BreakerMain extends JPanel {
         ball.draw(g2);
         bouncer.draw(g2);
     }
-    public void movebouncer() {
+//    public void movebouncer() {
+//
+//        if (keys[KeyEvent.VK_UP]) {
+//            bouncer.setDir(Sprite.NORTH);
+//            bouncer.update();
+//            keys[KeyEvent.VK_UP] = false;
+//        }
+//        if (keys[KeyEvent.VK_LEFT]) {
+//            bouncer.setDir(Sprite.WEST);
+//            bouncer.update();
+//            keys[KeyEvent.VK_LEFT] = false;
+//        }
+//        if (keys[KeyEvent.VK_DOWN]) {
+//            bouncer.setDir(Sprite.SOUTH);
+//            bouncer.update();
+//            keys[KeyEvent.VK_DOWN] = false;
+//        }
+//        if (keys[KeyEvent.VK_RIGHT]) {
+//            bouncer.setDir(Sprite.EAST);
+//            bouncer.update();
+//            keys[KeyEvent.VK_RIGHT] = false;
+//        }
+//    }
 
-        if (keys[KeyEvent.VK_UP]) {
-            bouncer.setDir(Sprite.NORTH);
-            bouncer.update();
-            keys[KeyEvent.VK_UP] = false;
-        }
-        if (keys[KeyEvent.VK_LEFT]) {
-            bouncer.setDir(Sprite.WEST);
-            bouncer.update();
-            keys[KeyEvent.VK_LEFT] = false;
-        }
-        if (keys[KeyEvent.VK_DOWN]) {
-            bouncer.setDir(Sprite.SOUTH);
-            bouncer.update();
-            keys[KeyEvent.VK_DOWN] = false;
-        }
-        if (keys[KeyEvent.VK_RIGHT]) {
-            bouncer.setDir(Sprite.EAST);
-            bouncer.update();
-            keys[KeyEvent.VK_RIGHT] = false;
-        }
+    public void setKeyListener(){
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {
+
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_E) {
+                    bouncer.update();
+                    repaint();
+                }
+
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+
     }
 
 
