@@ -16,7 +16,7 @@ public class Sprite {
     private int dir, picOrientation; //dir is the current direction in degrees.  See the constants below.
     private BufferedImage pic; //put the file in the res folder.
     private int speed; //Number of pixels moved each frame.
-    private int id;
+    private int id, vx, vy;
 
 
     public Sprite(int x, int y, int dir) {
@@ -24,6 +24,8 @@ public class Sprite {
         this.dir = dir;
         setPic("ball.png", NORTH);  //Assumes pic is oriented NORTH by default
         speed = getBoundingRectangle().height;  //moves one height's worth by default.
+        vx = speed;
+        vy = speed;
 
         id = nextID;
         nextID++;
@@ -61,8 +63,13 @@ public class Sprite {
      * Moves the pic in the direction the Sprite is facing (dir).
      */
     public void update() {
+
         int dx = (int) (Math.cos(Math.toRadians(dir)) * speed);
         int dy = -(int) (Math.sin(Math.toRadians(dir)) * speed);
+
+        dx = vx;
+        dy = vy;
+
         loc.translate(dx, dy);
     }
 
@@ -224,4 +231,19 @@ public class Sprite {
         setPic(op.filter(getPic(), null));
     }
 
+    public int getVx() {
+        return vx;
+    }
+
+    public int getVy() {
+        return vy;
+    }
+
+    public void setVx(int vx) {
+        this.vx = vx;
+    }
+
+    public void setVy(int vy) {
+        this.vy = vy;
+    }
 }
