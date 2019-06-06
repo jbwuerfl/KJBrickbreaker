@@ -25,7 +25,7 @@ public class BreakerMain extends JPanel {
 
         ball = new Ball(300,200,30);
 
-        bouncer = new Bouncer(300,500);
+        bouncer = new Bouncer(300,625);
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -64,25 +64,16 @@ public class BreakerMain extends JPanel {
     }
     public void movebouncer() {
 
-        if (keys[KeyEvent.VK_W]) {
-            bouncer.setDir(Sprite.NORTH);
-            bouncer.updateleft();
-            keys[KeyEvent.VK_W] = false;
-        }
+
         if (keys[KeyEvent.VK_A]) {
             bouncer.setDir(Sprite.NORTH);
             bouncer.updateleft();
-            keys[KeyEvent.VK_A] = false;
-        }
-        if (keys[KeyEvent.VK_S]) {
-            bouncer.setDir(Sprite.SOUTH);
-            bouncer.update();
-            keys[KeyEvent.VK_S] = false;
+//            keys[KeyEvent.VK_A] = false;
         }
         if (keys[KeyEvent.VK_D]) {
             bouncer.setDir(Sprite.NORTH);
             bouncer.update();
-            keys[KeyEvent.VK_D] = false;
+//            keys[KeyEvent.VK_D] = false;
         }
     }
 
