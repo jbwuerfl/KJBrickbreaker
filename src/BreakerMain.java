@@ -93,7 +93,7 @@ public class BreakerMain extends JPanel {
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.VK_E) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_D) {
                     bouncer.update();
                     repaint();
                 }
