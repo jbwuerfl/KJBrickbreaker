@@ -5,16 +5,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.security.Key;
 
 public class BreakerMain extends JPanel {
 
     public static final int FRAMEWIDTH = 1200, FRAMEHEIGHT = 700;
     private Timer timer;
     private boolean[] keys;
+    private boolean startscreen;
 
     private Sprite ball;
 
-    private Sprite bouncer;
+    private Bouncer bouncer;
 
     private ArrayList<Sprite>brick;
 
@@ -26,6 +28,8 @@ public class BreakerMain extends JPanel {
     public BreakerMain(){
         brick = new ArrayList();
         keys = new boolean[512];
+
+        startscreen = true;
 
         ball = new Ball(300,200,30);
 
@@ -75,7 +79,10 @@ public class BreakerMain extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 ball.update();
 
-//                movebouncer();
+                movebouncer();
+
+                if (ball.intersects(bouncer))
+                    ball.setVy(-(ball.getVy()));
 
                 repaint();
 
@@ -99,35 +106,36 @@ public class BreakerMain extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.black);
         g2.fillRect(0, 0, 1200, 750);
+        g2.fillRect(0, 0, 1000, 750);
+
+        if (startscreen){
+            timer.stop();
+            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
+            g2.setColor(Color.green);
+            g2.drawString("Click S To Start", 200,350);
+
+        }
         ball.draw(g2);
         bouncer.draw(g2);
         for(Sprite b: brick){
             b.draw(g2);
         }
     }
-//    public void movebouncer() {
-//
-//        if (keys[KeyEvent.VK_UP]) {
-//            bouncer.setDir(Sprite.NORTH);
-//            bouncer.update();
-//            keys[KeyEvent.VK_UP] = false;
-//        }
-//        if (keys[KeyEvent.VK_LEFT]) {
-//            bouncer.setDir(Sprite.WEST);
-//            bouncer.update();
-//            keys[KeyEvent.VK_LEFT] = false;
-//        }
-//        if (keys[KeyEvent.VK_DOWN]) {
-//            bouncer.setDir(Sprite.SOUTH);
-//            bouncer.update();
-//            keys[KeyEvent.VK_DOWN] = false;
-//        }
-//        if (keys[KeyEvent.VK_RIGHT]) {
-//            bouncer.setDir(Sprite.EAST);
-//            bouncer.update();
-//            keys[KeyEvent.VK_RIGHT] = false;
-//        }
-//    }
+    public void movebouncer() {
+
+
+        if (keys[KeyEvent.VK_A]) {
+            bouncer.setDir(Sprite.NORTH);
+            bouncer.updateleft();
+//            keys[KeyEvent.VK_A] = false;
+        }
+        if (keys[KeyEvent.VK_D]) {
+            bouncer.setDir(Sprite.NORTH);
+            bouncer.update();
+//            keys[KeyEvent.VK_D] = false;
+        }
+
+    }
 
     public void setKeyListener(){
         addKeyListener(new KeyListener() {
@@ -139,16 +147,20 @@ public class BreakerMain extends JPanel {
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.VK_D) {
-                    bouncer.update();
-                    repaint();
-                }
+                keys[keyEvent.getKeyCode()] = true;
+//                if (keyEvent.getKeyCode() == KeyEvent.VK_D) {
+//                    bouncer.update();
+//                    repaint();
+//                }
+                if (keyEvent.getKeyCode() == KeyEvent.VK_S)
+                    startscreen = false;
 
 
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent keyEvent) {
+                keys[keyEvent.getKeyCode()] = false;
 
             }
         });
