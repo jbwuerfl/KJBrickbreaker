@@ -27,7 +27,7 @@ public class BreakerMain extends JPanel {
 
         startscreen = true;
 
-        ball = new Ball(300,200,30);
+        ball = new Ball(300,200,20);
 
         bouncer = new Bouncer(300,625);
 
@@ -105,8 +105,12 @@ public class BreakerMain extends JPanel {
 //                    bouncer.update();
 //                    repaint();
 //                }
-                if (keyEvent.getKeyCode() == KeyEvent.VK_S)
+                if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
                     startscreen = false;
+                    timer.start();
+                }
+
+                repaint();
 
 
             }
