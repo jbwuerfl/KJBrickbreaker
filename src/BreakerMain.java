@@ -13,7 +13,7 @@ public class BreakerMain extends JPanel {
 
     private Sprite ball;
 
-    private Sprite bouncer;
+    private Bouncer bouncer;
 
 
 
@@ -32,7 +32,10 @@ public class BreakerMain extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 ball.update();
 
-//                movebouncer();
+                movebouncer();
+
+                if (ball.intersects(bouncer))
+                    ball.setVy(-(ball.getVy()));
 
                 repaint();
 
@@ -59,29 +62,29 @@ public class BreakerMain extends JPanel {
         ball.draw(g2);
         bouncer.draw(g2);
     }
-//    public void movebouncer() {
-//
-//        if (keys[KeyEvent.VK_UP]) {
-//            bouncer.setDir(Sprite.NORTH);
-//            bouncer.update();
-//            keys[KeyEvent.VK_UP] = false;
-//        }
-//        if (keys[KeyEvent.VK_LEFT]) {
-//            bouncer.setDir(Sprite.WEST);
-//            bouncer.update();
-//            keys[KeyEvent.VK_LEFT] = false;
-//        }
-//        if (keys[KeyEvent.VK_DOWN]) {
-//            bouncer.setDir(Sprite.SOUTH);
-//            bouncer.update();
-//            keys[KeyEvent.VK_DOWN] = false;
-//        }
-//        if (keys[KeyEvent.VK_RIGHT]) {
-//            bouncer.setDir(Sprite.EAST);
-//            bouncer.update();
-//            keys[KeyEvent.VK_RIGHT] = false;
-//        }
-//    }
+    public void movebouncer() {
+
+        if (keys[KeyEvent.VK_W]) {
+            bouncer.setDir(Sprite.NORTH);
+            bouncer.updateleft();
+            keys[KeyEvent.VK_W] = false;
+        }
+        if (keys[KeyEvent.VK_A]) {
+            bouncer.setDir(Sprite.NORTH);
+            bouncer.updateleft();
+            keys[KeyEvent.VK_A] = false;
+        }
+        if (keys[KeyEvent.VK_S]) {
+            bouncer.setDir(Sprite.SOUTH);
+            bouncer.update();
+            keys[KeyEvent.VK_S] = false;
+        }
+        if (keys[KeyEvent.VK_D]) {
+            bouncer.setDir(Sprite.NORTH);
+            bouncer.update();
+            keys[KeyEvent.VK_D] = false;
+        }
+    }
 
     public void setKeyListener(){
         addKeyListener(new KeyListener() {
@@ -93,16 +96,18 @@ public class BreakerMain extends JPanel {
 
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.VK_D) {
-                    bouncer.update();
-                    repaint();
-                }
+                keys[keyEvent.getKeyCode()] = true;
+//                if (keyEvent.getKeyCode() == KeyEvent.VK_D) {
+//                    bouncer.update();
+//                    repaint();
+//                }
 
 
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent keyEvent) {
+                keys[keyEvent.getKeyCode()] = false;
 
             }
         });
