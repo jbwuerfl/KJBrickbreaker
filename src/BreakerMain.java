@@ -4,10 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class BreakerMain extends JPanel {
 
-    public static final int FRAMEWIDTH = 1000, FRAMEHEIGHT = 700;
+    public static final int FRAMEWIDTH = 1200, FRAMEHEIGHT = 700;
     private Timer timer;
     private boolean[] keys;
 
@@ -15,17 +16,59 @@ public class BreakerMain extends JPanel {
 
     private Sprite bouncer;
 
+    private ArrayList<Sprite>brick;
+
 
 
 
 
 
     public BreakerMain(){
+        brick = new ArrayList();
         keys = new boolean[512];
 
         ball = new Ball(300,200,30);
 
-        bouncer = new Bouncer(300,500);
+        bouncer = new Bouncer(600,600);
+
+        brick.add(new Brick(0,0));
+        brick.add(new Brick(75,0));
+        brick.add(new Brick(150,0));
+        brick.add(new Brick(225,0));
+        brick.add(new Brick(300,0));
+        brick.add(new Brick(375,0));
+        brick.add(new Brick(450,0));
+        brick.add(new Brick(525,0));
+        brick.add(new Brick(600,0));
+        brick.add(new Brick(675,0));
+        brick.add(new Brick(750,0));
+        brick.add(new Brick(825,0));
+        brick.add(new Brick(900,0));
+        brick.add(new Brick(975,0));
+        brick.add(new Brick(1050,0));
+        brick.add(new Brick(1125,0));
+        brick.add(new Brick(1200,0));
+
+        brick.add(new Brick(0,20));
+        brick.add(new Brick(75,20));
+        brick.add(new Brick(150,20));
+        brick.add(new Brick(225,20));
+        brick.add(new Brick(300,20));
+        brick.add(new Brick(375,20));
+        brick.add(new Brick(450,20));
+        brick.add(new Brick(525,20));
+        brick.add(new Brick(600,20));
+        brick.add(new Brick(675,20));
+        brick.add(new Brick(750,20));
+        brick.add(new Brick(825,20));
+        brick.add(new Brick(900,20));
+        brick.add(new Brick(975,20));
+        brick.add(new Brick(1050,20));
+        brick.add(new Brick(1125,20));
+        brick.add(new Brick(1200,20));
+
+
+
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -55,9 +98,12 @@ public class BreakerMain extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.black);
-        g2.fillRect(0, 0, 1000, 750);
+        g2.fillRect(0, 0, 1200, 750);
         ball.draw(g2);
         bouncer.draw(g2);
+        for(Sprite b: brick){
+            b.draw(g2);
+        }
     }
 //    public void movebouncer() {
 //
