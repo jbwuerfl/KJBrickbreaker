@@ -20,16 +20,11 @@ public class BreakerMain extends JPanel {
 
     private ArrayList<Sprite>brick;
 
-
-
-
-
-
     public BreakerMain(){
         brick = new ArrayList();
         keys = new boolean[512];
 
-        startscreen = true;
+//        startscreen = true;
 
         ball = new Ball(300,200,30);
 
@@ -53,23 +48,59 @@ public class BreakerMain extends JPanel {
         brick.add(new Brick(1125,0));
         brick.add(new Brick(1200,0));
 
-        brick.add(new Brick(0,20));
-        brick.add(new Brick(75,20));
-        brick.add(new Brick(150,20));
-        brick.add(new Brick(225,20));
-        brick.add(new Brick(300,20));
-        brick.add(new Brick(375,20));
-        brick.add(new Brick(450,20));
-        brick.add(new Brick(525,20));
-        brick.add(new Brick(600,20));
-        brick.add(new Brick(675,20));
-        brick.add(new Brick(750,20));
-        brick.add(new Brick(825,20));
-        brick.add(new Brick(900,20));
-        brick.add(new Brick(975,20));
-        brick.add(new Brick(1050,20));
-        brick.add(new Brick(1125,20));
-        brick.add(new Brick(1200,20));
+        brick.add(new Brick(0,33));
+        brick.add(new Brick(75,33));
+        brick.add(new Brick(150,33));
+        brick.add(new Brick(225,33));
+        brick.add(new Brick(300,33));
+        brick.add(new Brick(375,33));
+        brick.add(new Brick(450,33));
+        brick.add(new Brick(525,33));
+        brick.add(new Brick(600,33));
+        brick.add(new Brick(675,33));
+        brick.add(new Brick(750,33));
+        brick.add(new Brick(825,33));
+        brick.add(new Brick(900,33));
+        brick.add(new Brick(975,33));
+        brick.add(new Brick(1050,33));
+        brick.add(new Brick(1125,33));
+        brick.add(new Brick(1200,33));
+
+        brick.add(new Brick(0,66));
+        brick.add(new Brick(75,66));
+        brick.add(new Brick(150,66));
+        brick.add(new Brick(225,66));
+        brick.add(new Brick(300,66));
+        brick.add(new Brick(375,66));
+        brick.add(new Brick(450,66));
+        brick.add(new Brick(525,66));
+        brick.add(new Brick(600,66));
+        brick.add(new Brick(675,66));
+        brick.add(new Brick(750,66));
+        brick.add(new Brick(825,66));
+        brick.add(new Brick(900,66));
+        brick.add(new Brick(975,66));
+        brick.add(new Brick(1050,66));
+        brick.add(new Brick(1125,66));
+        brick.add(new Brick(1200,66));
+
+        brick.add(new Brick(0,99));
+        brick.add(new Brick(75,99));
+        brick.add(new Brick(150,99));
+        brick.add(new Brick(225,99));
+        brick.add(new Brick(300,99));
+        brick.add(new Brick(375,99));
+        brick.add(new Brick(450,99));
+        brick.add(new Brick(525,99));
+        brick.add(new Brick(600,99));
+        brick.add(new Brick(675,99));
+        brick.add(new Brick(750,99));
+        brick.add(new Brick(825,99));
+        brick.add(new Brick(900,99));
+        brick.add(new Brick(975,99));
+        brick.add(new Brick(1050,99));
+        brick.add(new Brick(1125,99));
+        brick.add(new Brick(1200,99));
 
 
 
@@ -83,6 +114,16 @@ public class BreakerMain extends JPanel {
 
                 if (ball.intersects(bouncer))
                     ball.setVy(-(ball.getVy()));
+                for(int i = brick.size()-1; i > 0; i--){
+                    brick.get(i).update();
+                    if (brick.get(i).getBoundingRectangle().intersects(ball.getBoundingRectangle())) {
+                        brick.remove(i);
+                        ball.setVy(-ball.getVy());
+                    }
+                }
+
+//                movebouncer();
+
 
                 repaint();
 
@@ -106,15 +147,14 @@ public class BreakerMain extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.black);
         g2.fillRect(0, 0, 1200, 750);
-        g2.fillRect(0, 0, 1000, 750);
 
-        if (startscreen){
-            timer.stop();
-            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
-            g2.setColor(Color.green);
-            g2.drawString("Click S To Start", 200,350);
-
-        }
+//        if (startscreen){
+//            timer.stop();
+//            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
+//            g2.setColor(Color.green);
+//            g2.drawString("Click S To Start", 200,350);
+//
+//        }
         ball.draw(g2);
         bouncer.draw(g2);
         for(Sprite b: brick){

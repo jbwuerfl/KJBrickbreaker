@@ -20,7 +20,7 @@ public class Brick extends Sprite{
     public void draw(Graphics2D g2) {
 
         g2.setColor(new Color(red, green, blue));
-        g2.fillRect(getLoc().x, getLoc().y, 75, 20 );
+        g2.fillRect(getLoc().x, getLoc().y, 75, 30 );
 
     }
 }
