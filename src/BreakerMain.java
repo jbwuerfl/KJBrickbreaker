@@ -41,6 +41,15 @@ public class BreakerMain extends JPanel {
                 if (ball.intersects(bouncer))
                     ball.setVy(-(ball.getVy()));
 
+                if (bouncer.getLoc().x < -75)
+                    bouncer.setLoc(new Point(1000,625));
+
+                if (bouncer.getLoc().x > 1000)
+                    bouncer.setLoc(new Point(-75,625));
+
+                if (ball.getLoc().y > 700)
+                    startscreen = true;
+
                 repaint();
 
             }
@@ -107,6 +116,7 @@ public class BreakerMain extends JPanel {
 //                }
                 if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
                     startscreen = false;
+                    ball.setLoc(new Point(300,200));
                     timer.start();
                 }
 

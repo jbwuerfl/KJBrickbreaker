@@ -12,8 +12,8 @@ public class Ball extends Sprite{
             setVx(-getVx());
         }
 
-        if(getLoc().y > 680 || getLoc().y < 0){
-            setVy(-getVy());
+        if(getLoc().y < 0){ //getLoc().y > 680 ||
+                setVy(-getVy());
         }
 
 //        if (getLoc().x > 900) {
