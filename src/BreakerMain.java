@@ -4,12 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 public class BreakerMain extends JPanel {
 
     public static final int FRAMEWIDTH = 1000, FRAMEHEIGHT = 700;
     private Timer timer;
     private boolean[] keys;
+    private boolean startscreen;
 
     private Sprite ball;
 
@@ -22,6 +24,8 @@ public class BreakerMain extends JPanel {
 
     public BreakerMain(){
         keys = new boolean[512];
+
+        startscreen = true;
 
         ball = new Ball(300,200,30);
 
@@ -59,6 +63,14 @@ public class BreakerMain extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.black);
         g2.fillRect(0, 0, 1000, 750);
+
+        if (startscreen){
+            timer.stop();
+            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
+            g2.setColor(Color.green);
+            g2.drawString("Click S To Start", 200,350);
+
+        }
         ball.draw(g2);
         bouncer.draw(g2);
     }
@@ -75,6 +87,7 @@ public class BreakerMain extends JPanel {
             bouncer.update();
 //            keys[KeyEvent.VK_D] = false;
         }
+
     }
 
     public void setKeyListener(){
@@ -92,6 +105,8 @@ public class BreakerMain extends JPanel {
 //                    bouncer.update();
 //                    repaint();
 //                }
+                if (keyEvent.getKeyCode() == KeyEvent.VK_S)
+                    startscreen = false;
 
 
             }
