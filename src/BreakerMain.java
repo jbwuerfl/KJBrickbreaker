@@ -117,6 +117,7 @@ public class BreakerMain extends JPanel {
                     b.update();
                     if (collides(b,ball)) {
                         ball.setVy(-ball.getVy());
+
                         brick.remove(i);
 
                     }
@@ -185,12 +186,12 @@ public class BreakerMain extends JPanel {
     public void movebouncer() {
 
 
-        if (keys[KeyEvent.VK_A]) {
+        if (keys[KeyEvent.VK_LEFT]) {
             bouncer.setDir(Sprite.NORTH);
             bouncer.updateleft();
 //            keys[KeyEvent.VK_A] = false;
         }
-        if (keys[KeyEvent.VK_D]) {
+        if (keys[KeyEvent.VK_RIGHT]) {
             bouncer.setDir(Sprite.NORTH);
             bouncer.update();
 //            keys[KeyEvent.VK_D] = false;
