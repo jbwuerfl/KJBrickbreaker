@@ -112,16 +112,27 @@ public class BreakerMain extends JPanel {
 
                 movebouncer();
 
-                if (ball.intersects(bouncer))
-                    ball.setVy(-(ball.getVy()));
-                for(int i = brick.size()-1; i > 0; i--){
-                    brick.get(i).update();
-                    if (brick.get(i).getBoundingRectangle().intersects(ball.getBoundingRectangle())) {
-                        brick.remove(i);
+                for (Sprite b:brick) {
+                    b.update();
+                    if (collides(b,ball)) {
                         ball.setVy(-ball.getVy());
+                        brick.remove(b);
 
                     }
+
                 }
+
+                if (collides(ball,bouncer))
+                    ball.setVy(-(ball.getVy()));
+////                    ball.setVy(-(ball.getVy()));
+//                for(Sprite i: brick){
+//
+//                    if (i.intersects(ball)) {
+//                        brick.remove(i);
+//                        ball.setVy(-ball.getVy());
+//
+//                    }
+//                }
 
 //                movebouncer();
 
@@ -186,6 +197,27 @@ public class BreakerMain extends JPanel {
         }
 
     }
+
+    private boolean collides(Sprite c1, Sprite r1) {
+        float closestX = clamp(c1.getLoc().x, r1.getLoc().x, r1.getLoc().x + r1.getBoundingRectangle().width);
+        float closestY = clamp(c1.getLoc().y, r1.getLoc().y - r1.getBoundingRectangle().height, r1.getLoc().y);
+
+        float distanceX = c1.getLoc().x - closestX;
+        float distanceY = c1.getLoc().y - closestY;
+
+        return Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(c1.getBoundingRectangle().height, 2);
+    }
+
+    public float clamp(float value, float min, float max) {
+        float x = value;
+        if (x < min) {
+            x = min;
+        } else if (x > max) {
+            x = max;
+        }
+        return x;
+    }
+
 
     public void setKeyListener(){
         addKeyListener(new KeyListener() {
