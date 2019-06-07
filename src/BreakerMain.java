@@ -192,7 +192,7 @@ public class BreakerMain extends JPanel {
             timer.stop();
             g2.setFont(new Font("Helvetica", Font.BOLD, 80));
             g2.setColor(Color.green);
-            g2.drawString("Click S To Start", 200,350);
+            g2.drawString("Click SPACE To Start", 200,350);
 
         }
 
@@ -277,7 +277,7 @@ public class BreakerMain extends JPanel {
 //                    bouncer.update();
 //                    repaint();
 //                }
-                if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
 
                     if (startscreen) {
                         ball.setLoc(new Point((int) (Math.random() * 1200), 200));
