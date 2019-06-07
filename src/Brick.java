@@ -6,9 +6,9 @@ public class Brick extends Sprite{
 
     public Brick(int x, int y){
         super(x,y, NORTH, 0);
-         red = (int)(Math.random() * 256);
-         blue = (int)(Math.random() * 256);
-         green = (int)(Math.random() * 256);
+         red = (int)(Math.random() * 254 + 1);
+         blue = (int)(Math.random() * 254 + 1);
+         green = (int)(Math.random() * 254 + 1);
     }
 
     @Override

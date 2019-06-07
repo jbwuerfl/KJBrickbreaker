@@ -13,6 +13,9 @@ public class BreakerMain extends JPanel {
     private Timer timer;
     private boolean[] keys;
     private boolean startscreen;
+    private Heart heart1, heart2, heart3;
+    private int lives = 3;
+    private boolean endgame;
 
     private Sprite ball;
 
@@ -25,6 +28,7 @@ public class BreakerMain extends JPanel {
         keys = new boolean[512];
 
         startscreen = true;
+        endgame = false;
 
         ball = new Ball((int)(Math.random() * 1200),200,20);
 
@@ -102,6 +106,10 @@ public class BreakerMain extends JPanel {
         brick.add(new Brick(1125,99));
         brick.add(new Brick(1200,99));
 
+        heart1 = new Heart(10, 670);
+        heart2 = new Heart(30, 670);
+        heart3 = new Heart(50, 670);
+
 
 
 
@@ -124,6 +132,9 @@ public class BreakerMain extends JPanel {
 
                 }
 
+
+
+
                 if (collides(ball,bouncer))
                     ball.setVy(-(ball.getVy()));
 ////                    ball.setVy(-(ball.getVy()));
@@ -144,8 +155,15 @@ public class BreakerMain extends JPanel {
                 if (bouncer.getLoc().x > 1200)
                     bouncer.setLoc(new Point(-75,625));
 
-                if (ball.getLoc().y > 700)
+                if (lives == 0) {
+                    endgame = true;
+                    startscreen = false;
+                }
+                if (ball.getLoc().y > 700) {
                     startscreen = true;
+                    lives--;
+                }
+
 
                 repaint();
 
@@ -177,11 +195,35 @@ public class BreakerMain extends JPanel {
             g2.drawString("Click S To Start", 200,350);
 
         }
+
+        if (endgame){
+            timer.stop();
+            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
+            g2.setColor(Color.pink);
+            g2.drawString("Click R To Start", 200,350);
+
+        }
+
+
+
         ball.draw(g2);
         bouncer.draw(g2);
         for(Sprite b: brick){
             b.draw(g2);
         }
+
+        if(lives > 0){
+            heart1.draw(g2);
+        }
+        if (lives > 1){
+            heart2.draw(g2);
+        }
+        if (lives > 2){
+            heart3.draw(g2);
+        }
+
+
+
     }
     public void movebouncer() {
 
@@ -238,17 +280,30 @@ public class BreakerMain extends JPanel {
                 if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
 
                     if (startscreen) {
-                        ball.setLoc(new Point((int)(Math.random() * 1200), 200));
-                        bouncer.setLoc(new Point(500,625));
+                        ball.setLoc(new Point((int) (Math.random() * 1200), 200));
+                        bouncer.setLoc(new Point(500, 625));
                     }
                     startscreen = false;
                     timer.start();
                 }
 
+                if (keys[KeyEvent.VK_R]) {
+
+                    if (endgame) {
+                        ball.setLoc(new Point((int) (Math.random() * 1200), 200));
+                        bouncer.setLoc(new Point(500, 625));
+                        lives = 3;
+                    }
+                    endgame = false;
+                    timer.start();
+                }
+
+
                 repaint();
 
 
             }
+
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {

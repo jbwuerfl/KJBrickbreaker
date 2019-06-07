@@ -76,6 +76,7 @@ public class Sprite {
     /**
      * Returns true if this Sprite intersects the other Sprite
      */
+
     public boolean intersects(Sprite other) {
         return getBoundingRectangle().intersects(other.getBoundingRectangle());
     }
@@ -95,6 +96,7 @@ public class Sprite {
      *
      * @return the bounding Rectangle.
      */
+
     public Rectangle getBoundingRectangle() {
         Rectangle box = null;
         if (picOrientation % 180 != 0)
