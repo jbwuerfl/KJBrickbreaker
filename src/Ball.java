@@ -8,7 +8,7 @@ public class Ball extends Sprite{
     @Override
     public void update() {
         super.update();
-        if(getLoc().x > 980 || getLoc().x < 0){
+        if(getLoc().x > 1180 || getLoc().x < 0){
             setVx(-getVx());
         }
 

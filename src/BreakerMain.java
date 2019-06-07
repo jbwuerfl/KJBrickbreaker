@@ -127,9 +127,9 @@ public class BreakerMain extends JPanel {
 
 
                 if (bouncer.getLoc().x < -75)
-                    bouncer.setLoc(new Point(1000,625));
+                    bouncer.setLoc(new Point(1200,625));
 
-                if (bouncer.getLoc().x > 1000)
+                if (bouncer.getLoc().x > 1200)
                     bouncer.setLoc(new Point(-75,625));
 
                 if (ball.getLoc().y > 700)
