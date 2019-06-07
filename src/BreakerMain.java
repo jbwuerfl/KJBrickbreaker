@@ -115,8 +115,12 @@ public class BreakerMain extends JPanel {
 //                    repaint();
 //                }
                 if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
+
+                    if (startscreen) {
+                        ball.setLoc(new Point(300, 200));
+                        bouncer.setLoc(new Point(500,625));
+                    }
                     startscreen = false;
-                    ball.setLoc(new Point(300,200));
                     timer.start();
                 }
 
