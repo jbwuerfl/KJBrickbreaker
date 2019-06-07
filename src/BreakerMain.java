@@ -26,7 +26,7 @@ public class BreakerMain extends JPanel {
 
 //        startscreen = true;
 
-        ball = new Ball(300,200,30);
+        ball = new Ball(300,200,20);
 
         bouncer = new Bouncer(600,600);
 
@@ -125,6 +125,15 @@ public class BreakerMain extends JPanel {
 //                movebouncer();
 
 
+                if (bouncer.getLoc().x < -75)
+                    bouncer.setLoc(new Point(1000,625));
+
+                if (bouncer.getLoc().x > 1000)
+                    bouncer.setLoc(new Point(-75,625));
+
+                if (ball.getLoc().y > 700)
+                    startscreen = true;
+
                 repaint();
 
             }
@@ -192,8 +201,17 @@ public class BreakerMain extends JPanel {
 //                    bouncer.update();
 //                    repaint();
 //                }
-                if (keyEvent.getKeyCode() == KeyEvent.VK_S)
+                if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
+
+                    if (startscreen) {
+                        ball.setLoc(new Point(300, 200));
+                        bouncer.setLoc(new Point(500,625));
+                    }
                     startscreen = false;
+                    timer.start();
+                }
+
+                repaint();
 
 
             }
