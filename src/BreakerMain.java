@@ -26,7 +26,7 @@ public class BreakerMain extends JPanel {
 
         startscreen = true;
 
-        ball = new Ball(300,200,20);
+        ball = new Ball((int)(Math.random() * 1200),200,20);
 
         bouncer = new Bouncer(600,600);
 
@@ -237,7 +237,7 @@ public class BreakerMain extends JPanel {
                 if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
 
                     if (startscreen) {
-                        ball.setLoc(new Point(300, 200));
+                        ball.setLoc(new Point((int)(Math.random() * 1200), 200));
                         bouncer.setLoc(new Point(500,625));
                     }
                     startscreen = false;

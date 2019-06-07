@@ -21,4 +21,11 @@ public class Bouncer extends Sprite {
 
     }
 
+    public void doubleleft() {
+        setVy(0);
+        setVx(-getSpeed());
+        super.update();
+
+    }
+
 }
