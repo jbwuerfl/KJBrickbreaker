@@ -24,7 +24,7 @@ public class BreakerMain extends JPanel {
         brick = new ArrayList();
         keys = new boolean[512];
 
-//        startscreen = true;
+        startscreen = true;
 
         ball = new Ball(300,200,20);
 
@@ -119,6 +119,7 @@ public class BreakerMain extends JPanel {
                     if (brick.get(i).getBoundingRectangle().intersects(ball.getBoundingRectangle())) {
                         brick.remove(i);
                         ball.setVy(-ball.getVy());
+
                     }
                 }
 
@@ -157,13 +158,13 @@ public class BreakerMain extends JPanel {
         g2.setColor(Color.black);
         g2.fillRect(0, 0, 1200, 750);
 
-//        if (startscreen){
-//            timer.stop();
-//            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
-//            g2.setColor(Color.green);
-//            g2.drawString("Click S To Start", 200,350);
-//
-//        }
+        if (startscreen){
+            timer.stop();
+            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
+            g2.setColor(Color.green);
+            g2.drawString("Click S To Start", 200,350);
+
+        }
         ball.draw(g2);
         bouncer.draw(g2);
         for(Sprite b: brick){
