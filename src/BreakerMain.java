@@ -112,11 +112,12 @@ public class BreakerMain extends JPanel {
 
                 movebouncer();
 
-                for (Sprite b:brick) {
+                for (int i = 0; i < brick.size(); i++) {
+                    Brick b = (Brick)(brick.get(i));
                     b.update();
                     if (collides(b,ball)) {
                         ball.setVy(-ball.getVy());
-                        brick.remove(b);
+                        brick.remove(i);
 
                     }
 
@@ -134,7 +135,6 @@ public class BreakerMain extends JPanel {
 //                    }
 //                }
 
-//                movebouncer();
 
 
                 if (bouncer.getLoc().x < -75)
