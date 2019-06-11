@@ -119,24 +119,38 @@ public class BreakerMain extends JPanel {
                 ball.update();
 
                 movebouncer();
+                boolean bounceVert = false;
+                boolean bounceHorz = false;
 
                 for (int i = 0; i < brick.size(); i++) {
                     Brick b = (Brick)(brick.get(i));
                     b.update();
-                    if (collides(b,ball)) {
-                        ball.setVy(-ball.getVy());
 
+                    if (collides(ball, b)) {
+                        if (ball.getCenterPoint().y - (clamp(ball.getCenterPoint().y, b.getLoc().y, b.getLoc().y + b.getBoundingRectangle().height)) > 0 || ball.getCenterPoint().y - (clamp(ball.getCenterPoint().y, b.getLoc().y, b.getLoc().y + b.getBoundingRectangle().height)) < 0) {
+                            bounceVert = true;
+
+                        }
+                        else if (ball.getCenterPoint().x - (clamp(ball.getCenterPoint().x, b.getLoc().x, b.getLoc().x + b.getBoundingRectangle().width)) > 0 || ball.getCenterPoint().x - (clamp(ball.getCenterPoint().x, b.getLoc().x, b.getLoc().x + b.getBoundingRectangle().width)) < 0) {
+                             bounceHorz = true;
+
+                        }
                         brick.remove(i);
-
+                        i--;
                     }
 
                 }
+                if(bounceVert)
+                    ball.setVy(-ball.getVy());
+                if (bounceHorz)
+                    ball.setVx(-ball.getVx());
 
 
 
 
-                if (collides(ball,bouncer))
+                if (collides(ball,bouncer)) {
                     ball.setVy(-(ball.getVy()));
+                }
 ////                    ball.setVy(-(ball.getVy()));
 //                for(Sprite i: brick){
 //
@@ -209,7 +223,7 @@ public class BreakerMain extends JPanel {
         ball.draw(g2);
         bouncer.draw(g2);
         for(Sprite b: brick){
-            b.draw(g2);
+                b.draw(g2);
         }
 
         if(lives > 0){
@@ -240,15 +254,37 @@ public class BreakerMain extends JPanel {
         }
 
     }
+//    private boolean collides(Circle c1, Rectangle r1) {
+//        float closestX = Calc.clamp(c1.getX(), r1.x, r1.x + r1.width);
+//        float closestY = Calc.clamp(c1.getY(), r1.y - r1.height, r1.y);
+//
+//        float distanceX = c1.getX() - closestX;
+//        float distanceY = c1.getY() - closestY;
+//
+//        return Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(c1.getRadius(), 2);
+//    }
+//
+//    public static float clamp(float value, float min, float max) {
+//        float x = value;
+//        if (x < min) {
+//            x = min;
+//        } else if (x > max) {
+//            x = max;
+//        }
+//        return x;
+//    }
 
     private boolean collides(Sprite c1, Sprite r1) {
-        float closestX = clamp(c1.getLoc().x, r1.getLoc().x, r1.getLoc().x + r1.getBoundingRectangle().width);
-        float closestY = clamp(c1.getLoc().y, r1.getLoc().y - r1.getBoundingRectangle().height, r1.getLoc().y);
 
-        float distanceX = c1.getLoc().x - closestX;
-        float distanceY = c1.getLoc().y - closestY;
+//        return c1.intersects(r1);
 
-        return Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(c1.getBoundingRectangle().height, 2);
+        float closestX = clamp(c1.getCenterPoint().x, r1.getLoc().x, r1.getLoc().x + r1.getBoundingRectangle().width);
+        float closestY = clamp(c1.getCenterPoint().y, r1.getLoc().y, r1.getLoc().y + r1.getBoundingRectangle().height);
+
+        float distanceX = c1.getCenterPoint().x - closestX;
+        float distanceY = c1.getCenterPoint().y - closestY;
+
+        return Math.pow(distanceX, 2) + Math.pow(distanceY, 2) < Math.pow(c1.getBoundingRectangle().height/2, 2);
     }
 
     public float clamp(float value, float min, float max) {
