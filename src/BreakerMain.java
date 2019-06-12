@@ -30,7 +30,7 @@ public class BreakerMain extends JPanel {
         startscreen = true;
         endgame = false;
 
-        ball = new Ball((int)(Math.random() * 1200),200,20);
+        ball = new Ball((int)(Math.random() * 1200),120,20);
 
         bouncer = new Bouncer(600,600);
 
@@ -89,7 +89,7 @@ public class BreakerMain extends JPanel {
 
                 if (collides(ball,bouncer)) {
                     ball.setVy(-(ball.getVy()));
-//                    ball.setVx(-ball.getVx());
+
                 }
 ////                    ball.setVy(-(ball.getVy()));
 //                for(Sprite i: brick){
@@ -255,7 +255,7 @@ public class BreakerMain extends JPanel {
                 if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
 
                     if (startscreen) {
-                        ball.setLoc(new Point((int) (Math.random() * 1200), 200));
+                        ball.setLoc(new Point((int) (Math.random() * 1200), 120));
                         bouncer.setLoc(new Point(500, 625));
                     }
                     startscreen = false;
@@ -265,7 +265,7 @@ public class BreakerMain extends JPanel {
                 if (keys[KeyEvent.VK_R]) {
 
                     if (endgame) {
-                        ball.setLoc(new Point((int) (Math.random() * 1200), 200));
+                        ball.setLoc(new Point((int) (Math.random() * 1200), 120));
                         bouncer.setLoc(new Point(500, 625));
                         lives = 3;
                         int brickX = 0, brickY = 0, brickW = 75, brickH = 30;
