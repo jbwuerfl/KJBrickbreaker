@@ -22,6 +22,8 @@ public class BreakerMain extends JPanel {
 
     private Sprite lost;
 
+    private Sprite won;
+
     private Sprite ball;
 
     private Bouncer bouncer;
@@ -38,6 +40,7 @@ public class BreakerMain extends JPanel {
 
         ball = new Ball((int)(Math.random() * 1200),150,20);
         lost = new Loser();
+        won = new Winner();
 
         bouncer = new Bouncer(600,600);
 
@@ -265,6 +268,14 @@ public class BreakerMain extends JPanel {
 
         }
 
+        if (brick.size() == 0){
+            timer.stop();
+            won.draw(g2);
+            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
+            g2.drawString("Nice, Click R To Restart", 200,400);
+
+        }
+
     }
     public void movebouncer() {
 
@@ -352,7 +363,7 @@ public class BreakerMain extends JPanel {
 
                 if (keys[KeyEvent.VK_R]) {
 
-                    if (endgame) {
+                    if (endgame || (brick.size() == 0)) {
                         ball.setLoc(new Point((int) (Math.random() * 1200), 150));
                         bouncer.setLoc(new Point(500, 625));
                         lives = 3;
