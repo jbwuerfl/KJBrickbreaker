@@ -39,8 +39,6 @@ public class BreakerMain extends JPanel {
         ball = new Ball((int)(Math.random() * 1200),150,20);
         lost = new Loser();
 
-        ball = new Ball((int)(Math.random() * 1200),200,20);
-
         bouncer = new Bouncer(600,600);
 
         int brickX = 0, brickY = 0, brickW = 75, brickH = 30;
@@ -69,6 +67,8 @@ public class BreakerMain extends JPanel {
                 movebouncer();
                 boolean bounceVert = false;
                 boolean bounceHorz = false;
+                boolean bounceVert2 = false;
+                boolean bounceHorz2 = false;
 
                 for (int i = 0; i < brick.size(); i++) {
                     Brick b = (Brick)(brick.get(i));
@@ -95,6 +95,48 @@ public class BreakerMain extends JPanel {
 
                 if(extraball){
                     eball.update();
+                    for (int i = 0; i < brick.size(); i++) {
+                        Brick b = (Brick)(brick.get(i));
+                        b.update();
+
+
+                        if (collides(eball, b)) {
+                            if (eball.getCenterPoint().y - (clamp(eball.getCenterPoint().y, b.getLoc().y, b.getLoc().y + b.getBoundingRectangle().height)) > 0 || ball.getCenterPoint().y - (clamp(ball.getCenterPoint().y, b.getLoc().y, b.getLoc().y + b.getBoundingRectangle().height)) < 0) {
+                                bounceVert2 = true;
+
+                            }
+                            else if (eball.getCenterPoint().x - (clamp(eball.getCenterPoint().x, b.getLoc().x, b.getLoc().x + b.getBoundingRectangle().width)) > 0 || ball.getCenterPoint().x - (clamp(ball.getCenterPoint().x, b.getLoc().x, b.getLoc().x + b.getBoundingRectangle().width)) < 0) {
+                                bounceHorz2 = true;
+
+                            }
+                            brick.remove(i);
+                            i--;
+                        }
+
+                    }
+
+                    if(bounceVert2)
+                        eball.setVy(-eball.getVy());
+                    if (bounceHorz2)
+                        eball.setVx(-eball.getVx());
+
+                    if (collides(eball, bouncer)) {
+                        if (eball.getCenterPoint().y - (clamp(eball.getCenterPoint().y, bouncer.getLoc().y, bouncer.getLoc().y + bouncer.getBoundingRectangle().height)) > 0 || eball.getCenterPoint().y - (clamp(eball.getCenterPoint().y, bouncer.getLoc().y, bouncer.getLoc().y + bouncer.getBoundingRectangle().height)) < 0) {
+                            eball.setVy(-eball.getVy());
+                            if ((eball.getVx() > 0 && bouncer.getVx() < 0) || (eball.getVx() < 0 && bouncer.getVx() > 0))
+                                eball.setVx(-eball.getVx());
+                            else if (bouncer.getVx() == 0)
+                                eball.setVx(eball.getVx());
+                            else {
+                                eball.setVx((int) (Math.random() * 15));
+                            }
+
+                        }
+                        else if (eball.getCenterPoint().x - (clamp(eball.getCenterPoint().x, bouncer.getLoc().x, bouncer.getLoc().x + bouncer.getBoundingRectangle().width)) > 0 || eball.getCenterPoint().x - (clamp(eball.getCenterPoint().x, bouncer.getLoc().x, bouncer.getLoc().x + bouncer.getBoundingRectangle().width)) < 0) {
+                            eball.setVx(-eball.getVx());
+
+                        }
+                    }
                 }
 
 
