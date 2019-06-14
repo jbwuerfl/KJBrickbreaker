@@ -16,6 +16,9 @@ public class BreakerMain extends JPanel {
     private Heart heart1, heart2, heart3;
     private int lives = 3;
     private boolean endgame;
+    private boolean extraball;
+
+    private Sprite eball;
 
     private Sprite lost;
 
@@ -31,7 +34,9 @@ public class BreakerMain extends JPanel {
 
         startscreen = true;
         endgame = false;
+        extraball = false;
 
+        ball = new Ball((int)(Math.random() * 1200),150,20);
         lost = new Loser();
 
         ball = new Ball((int)(Math.random() * 1200),200,20);
@@ -88,6 +93,10 @@ public class BreakerMain extends JPanel {
                 if (bounceHorz)
                     ball.setVx(-ball.getVx());
 
+                if(extraball){
+                    eball.update();
+                }
+
 
 
 
@@ -108,6 +117,7 @@ public class BreakerMain extends JPanel {
 
                     }
                 }
+
 ////                    ball.setVy(-(ball.getVy()));
 //                for(Sprite i: brick){
 //
@@ -174,7 +184,17 @@ public class BreakerMain extends JPanel {
 
         }
 
+        if (endgame){
+            timer.stop();
+            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
+            g2.setColor(Color.pink);
+            g2.drawString("Click R To Start", 200,350);
 
+        }
+
+        if (extraball){
+            eball.draw(g2);
+        }
 
 
 
@@ -281,7 +301,7 @@ public class BreakerMain extends JPanel {
                 if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
 
                     if (startscreen) {
-                        ball.setLoc(new Point((int) (Math.random() * 1200), 200));
+                        ball.setLoc(new Point((int) (Math.random() * 1200), 150));
                         bouncer.setLoc(new Point(500, 625));
                     }
                     startscreen = false;
@@ -291,7 +311,7 @@ public class BreakerMain extends JPanel {
                 if (keys[KeyEvent.VK_R]) {
 
                     if (endgame) {
-                        ball.setLoc(new Point((int) (Math.random() * 1200), 200));
+                        ball.setLoc(new Point((int) (Math.random() * 1200), 150));
                         bouncer.setLoc(new Point(500, 625));
                         lives = 3;
                         int brickX = 0, brickY = 0, brickW = 75, brickH = 30;
@@ -306,6 +326,11 @@ public class BreakerMain extends JPanel {
                     }
                     endgame = false;
                     timer.start();
+                }
+
+                if (keyEvent.getKeyCode() == KeyEvent.VK_E) {
+                    extraball = true;
+                    eball = new Ball((int)(Math.random() * 1200), 150, 20);
                 }
 
 
