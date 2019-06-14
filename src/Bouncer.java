@@ -1,7 +1,7 @@
 public class Bouncer extends Sprite {
 
     public Bouncer(int x, int y) {
-        super(x, y, NORTH,14);
+        super(x, y, NORTH,15);
         setPic("bouncer.png", NORTH);
     }
 

@@ -17,6 +17,8 @@ public class BreakerMain extends JPanel {
     private int lives = 3;
     private boolean endgame;
 
+    private Sprite lost;
+
     private Sprite ball;
 
     private Bouncer bouncer;
@@ -29,6 +31,8 @@ public class BreakerMain extends JPanel {
 
         startscreen = true;
         endgame = false;
+
+        lost = new Loser();
 
         ball = new Ball((int)(Math.random() * 1200),200,20);
 
@@ -95,7 +99,7 @@ public class BreakerMain extends JPanel {
                         else if (bouncer.getVx() == 0)
                             ball.setVx(ball.getVx());
                         else {
-                            ball.setVx((int) (Math.random() * 10));
+                            ball.setVx((int) (Math.random() * 15));
                         }
 
                     }
@@ -123,11 +127,18 @@ public class BreakerMain extends JPanel {
                     bouncer.setLoc(new Point(-75,625));
 
                 if (lives == 0) {
-                    endgame = true;
                     startscreen = false;
+                    endgame = true;
+
                 }
                 if (ball.getLoc().y > 700) {
-                    startscreen = true;
+                    if (endgame) {
+                        startscreen = false;
+                    }
+                    else if (!endgame){
+                        startscreen = true;
+                    }
+
                     lives--;
                 }
 
@@ -163,13 +174,7 @@ public class BreakerMain extends JPanel {
 
         }
 
-        if (endgame){
-            timer.stop();
-            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
-            g2.setColor(Color.pink);
-            g2.drawString("Click R To Start", 200,350);
 
-        }
 
 
 
@@ -188,7 +193,15 @@ public class BreakerMain extends JPanel {
         if (lives > 2){
             heart3.draw(g2);
         }
+        if (endgame){
+            timer.stop();
+            lost.draw(g2);
+            g2.setFont(new Font("Helvetica", Font.BOLD, 80));
+            g2.setColor(Color.pink);
+            g2.drawString("Click R To Restart", 200,350);
 
+
+        }
 
     }
     public void movebouncer() {
